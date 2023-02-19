@@ -33,7 +33,7 @@ class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         fields = '__all__'
         model = Group
- 
+
 
 class FollowSerializer(serializers.ModelSerializer):
     user = SlugRelatedField(
@@ -45,7 +45,7 @@ class FollowSerializer(serializers.ModelSerializer):
         queryset=User.objects.all(),
         slug_field='username'
     )
-    
+
     class Meta:
         fields = '__all__'
         model = Follow
@@ -63,4 +63,3 @@ class FollowSerializer(serializers.ModelSerializer):
                 'На себя нельзя подписываться'
             )
         return data
-

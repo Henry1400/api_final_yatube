@@ -3,7 +3,12 @@ from rest_framework import viewsets, pagination, permissions, mixins, filters
 
 from .permissions import IsAuthorOrReadOnly
 from posts.models import Post, Group
-from .serializers import PostSerializer, CommentSerializer, GroupSerializer, FollowSerializer
+from .serializers import (
+    PostSerializer,
+    CommentSerializer,
+    GroupSerializer,
+    FollowSerializer
+)
 
 
 class GroupViewSet(viewsets.ReadOnlyModelViewSet):
