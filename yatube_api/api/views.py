@@ -20,7 +20,7 @@ class GroupViewSet(viewsets.ReadOnlyModelViewSet):
 
 class PostViewSet(viewsets.ModelViewSet):
     '''Список публикаций.'''
-    queryset = Post.objects.select_related('author', 'group')
+    queryset = Post.objects.select_related('author')
     serializer_class = PostSerializer
     permission_classes = (IsAuthorOrReadOnly,)
     pagination_class = pagination.LimitOffsetPagination
@@ -54,7 +54,7 @@ class FollowViewSet(mixins.CreateModelMixin,
     search_fields = ('following__username', 'user__username',)
 
     def get_queryset(self):
-        return self.request.user.follower.select_related('user')
+        return self.request.user.follower.select_related('user', 'following')
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

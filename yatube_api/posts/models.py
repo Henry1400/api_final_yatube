@@ -67,6 +67,9 @@ class Comment(models.Model):
         db_index=True
     )
 
+    def __str__(self):
+        return self.author
+
 
 class Follow(models.Model):
     user = models.ForeignKey(
@@ -81,3 +84,11 @@ class Follow(models.Model):
         related_name='following',
         verbose_name='Подписка'
     )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'following'],
+                name='unique follower'
+            )
+        ]
